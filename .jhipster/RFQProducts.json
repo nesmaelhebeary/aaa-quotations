@@ -1,0 +1,55 @@
+{
+  "name": "RFQProducts",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "rfqId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "productId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "coverType",
+      "fieldType": "CoverType",
+      "fieldValues": "OpenCover,Closed"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "rFQProductsItems",
+      "otherEntityRelationshipName": "rFQProducts",
+      "relationshipName": "rFQProductsItems"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "rFQProductsSections",
+      "otherEntityRelationshipName": "rFQProducts",
+      "relationshipName": "rFQProductsSections"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "requestForQuotation",
+      "otherEntityRelationshipName": "rFQProducts",
+      "relationshipName": "requestForQuotation"
+    }
+  ],
+  "entityTableName": "rfq_products",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "microserviceName": "aaa",
+  "clientRootFolder": "aaa",
+  "databaseType": "sql",
+  "changelogDate": "20210422123429"
+}
