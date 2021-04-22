@@ -1,0 +1,344 @@
+entity RequestForQuotation {
+    id Long,
+    number String,
+    brokerId Long,
+    customerId Long,
+    createdDate LocalDate,
+    status RFQStatus,
+    createdBy String,
+    insuredNames String
+    additionalInsured String,
+    benificiaryName String,
+    policyTypeId Long,
+    effectiveDate LocalDate,
+    duration Integer,
+    numberOfDays Integer,
+    additionalInfo String,
+    mainteneacePeriod Integer,
+    trialPeriod Integer
+}
+
+
+entity Quotation {
+    id Long,
+    number String,
+    brokerId Long,
+    customerId Long,
+    createdDate LocalDate,
+    status QStatus,
+    version Integer,
+    createdBy String,
+    insuredNames String
+    additionalInsured String,
+    benificiaryName String,
+    policyTypeId Long,
+    effectiveDate LocalDate,
+    duration Integer,
+    numberOfDays Integer,
+    additionalInfo String,
+    mainteneacePeriod Integer,
+    trialPeriod Integer,
+    underWriterName String,
+    expiryDate LocalDate,
+    totalSumInsured Double,
+    totalMPL Double,
+    rfqId Long,
+    averageRate Double,
+    siteSurveyNeeded Boolean,
+    hasExtension Boolean,
+    rateOfExchangeUSD Double,
+    rateOfExchangeEU Double,
+    lineSettingsPercentage Double,
+    natCatPercentage Double,
+    axaShare Double
+}
+entity QuotationDistribution{
+id Long,
+quotationId Long,
+distributionType DistributionType,
+value Double,
+currency String,
+percentage Double,
+rate Double,
+premiums Double,
+commissionPercentage Double,
+taxPercentage Double,
+netPremiums Double
+}
+entity QuotationExtensions{
+id Long,
+quotationId Long,
+extensionId Long,
+limit Double,
+percentage Double,
+mplValue Double,
+extensionAr String,
+extensionEn String,
+entensionPercentageType EntensionPercentageType,
+modified Boolean,
+modifiedBy String
+}
+
+entity QuotationExtnesionDetails{
+id Long,
+quotaExtensionId Long ,
+percentageItemId Long ,
+percentageItemValue Double
+}
+entity SiteSurveyDetails{
+id Long,
+quotationId Long,
+requestedBy String,
+requestDate LocalDate,
+responseDate LocalDate,
+naceCode String,
+dataScoreSheetPath String,
+riskSurveyReportPath String
+}
+
+entity SiteSurveyDocuments{
+id Long,
+surveyId Long,
+documentPath String,
+documentName String
+}
+
+
+
+entity RFQProducts{
+    id Long,
+    rfqId Long,
+    productId Long,
+    coverType CoverType
+    }
+    
+    entity QProducts{
+    id Long,
+    quotationId Long,
+    productId Long,
+    coverType CoverType
+    }
+    
+    entity RFQProductsInfo{
+    id Long,
+    rfqId Long,
+    productId Long,
+    productAttrId Long,
+    attributeName String,
+    attributeValue String
+    }
+    
+    entity QProductsInfo{
+    id Long,
+    quotationId Long,
+    productId Long,
+    productAttrId Long,
+    attributeName String,
+    attributeValue String
+    }
+    
+    
+     entity RFQProductsInfoValueList{
+    id Long,
+    productValueAttrId Long,
+    attributeValue String
+    }
+    
+    entity QProductsInfoValueList{
+    id Long,
+    productValueAttrId Long,
+    attributeValue String
+    }
+    
+    
+    entity RFQProductsItems{
+    id Long,
+    productId Long,
+    rfqId Long,
+    itemName String,
+    itemDesc String
+     sumInsured Double,
+     currency String
+    }
+    
+     entity QProductsItems{
+    id Long,
+    productId Long,
+    quotationId Long,
+    itemName String,
+    itemDesc String
+     sumInsured Double,
+     currency String
+    }
+    
+    
+    entity RFQProductsItemsSections{
+    id Long,
+    productId Long,
+    rfqId Long,
+    sectionId Long,
+    sumInsured Double,
+    currency String
+    }
+    
+    entity QProductsItemsSections{
+    id Long,
+    productId Long,
+    quotationId Long,
+    sectionId Long,
+    sumInsured Double,
+     currency String
+    }
+    
+    entity RFQProductsItemsValues{
+    id Long,
+    productItemId Long,
+    attributeName String,
+    attributeValue String
+    }
+    
+    
+    entity QProductsItemsValues{
+    id Long,
+    productItemId Long,
+    attributeName String,
+    attributeValue String
+    }
+    
+    entity RFQProductsSections{
+    id Long,
+    sectionName String,
+     sumInsured Double,
+      currency String,
+     rfqId Long
+    }
+    
+    entity QProductsSections{
+    id Long,
+    sectionName String,
+     sumInsured Double,
+      currency String,
+     quotationId Long
+    }
+    
+  entity RFQDocuments {
+    id Long,
+    rfqId Long,
+    documentPath String,
+    documentName String,
+    uploadDate LocalDate
+}
+
+ entity QDocuments {
+    id Long,
+    quotationId Long,
+    documentPath String,
+    documentName String,
+    uploadDate LocalDate
+}
+
+
+
+relationship OneToMany {
+ RequestForQuotation to Quotation 
+}
+
+relationship OneToMany {
+ RequestForQuotation to RFQDocuments 
+}
+
+relationship OneToMany {
+ Quotation to QDocuments 
+}
+
+relationship OneToMany {
+ RequestForQuotation to RFQProducts 
+}
+
+relationship OneToMany {
+Quotation to QProducts 
+}
+relationship OneToOne {
+Quotation to SiteSurveyDetails 
+}
+
+relationship OneToMany {
+SiteSurveyDetails to SiteSurveyDocuments 
+}
+
+
+
+
+
+
+
+
+
+relationship OneToMany {
+ RFQProducts to RFQProductsItems 
+}
+
+relationship OneToMany {
+ QProducts to QProductsItems 
+}
+
+relationship OneToMany {
+ RFQProductsItems to RFQProductsItemsSections
+}
+
+relationship OneToMany {
+ QProductsItems to QProductsItemsSections
+}
+
+relationship OneToMany {
+ RFQProductsItems to RFQProductsItemsValues
+}
+
+relationship OneToMany {
+ QProductsItems to QProductsItemsValues
+}
+
+relationship OneToMany {
+ RequestForQuotation to RFQProductsInfo 
+}
+
+relationship OneToMany {
+ Quotation to QProductsInfo 
+}
+relationship OneToMany {
+ RFQProductsInfo to RFQProductsInfoValueList
+}
+
+relationship OneToMany {
+ QProductsInfo to QProductsInfoValueList
+}
+
+relationship OneToMany {
+RFQProducts to RFQProductsSections 
+}
+
+relationship OneToMany {
+QProducts to QProductsSections 
+}
+
+
+
+enum RFQStatus{
+New, Rejected, InProgress
+}
+enum QStatus{
+New, Rejected, InProgress
+}
+enum DistributionType{
+Retension, QuotaShared, Surplus, AutoFac, Fac
+}
+enum CoverType{
+OpenCover, Closed
+}
+enum EntensionPercentageType{
+TotalSumInsured, Section , Item
+}
+
+
+
+  
